@@ -7,6 +7,7 @@ const AdminProducts = () => {
   const [newProduct, setNewProduct] = useState({
     title: "",
     description: "",
+    image: "",
   });
   const [editProductId, setEditProductId] = useState(null); // For updating products
 
@@ -42,7 +43,7 @@ const AdminProducts = () => {
       );
       const data = await response.json();
       setProductData([...productData, data]); // Add the new product to the list
-      setNewProduct({ title: "", description: "" }); // Clear the form
+      setNewProduct({ title: "", description: "", image: "" }); // Clear the form
     } catch (error) {
       console.error("Failed to create product", error);
     }
@@ -78,7 +79,7 @@ const AdminProducts = () => {
         )
       );
       setEditProductId(null); // Exit edit mode
-      setNewProduct({ title: "", description: "" }); // Clear the form
+      setNewProduct({ title: "", description: "", image: "" }); // Clear the form
     } catch (error) {
       console.error("Failed to update product", error);
     }
@@ -95,6 +96,7 @@ const AdminProducts = () => {
     setNewProduct({
       title: product.title,
       description: product.description,
+      image: product.image,
     });
   };
 
@@ -142,6 +144,17 @@ const AdminProducts = () => {
               />
             </div>
             <div className="mb-4">
+              <label className="block mb-2 text-sm font-medium">image</label>
+              <input
+                type="text"
+                name="image"
+                value={newProduct.image}
+                onChange={handleChange}
+                className="border rounded w-full py-2 px-3"
+                required
+              />
+            </div>
+            <div className="mb-4">
               <label className="block mb-2 text-sm font-medium">
                 Description
               </label>
@@ -165,24 +178,36 @@ const AdminProducts = () => {
         {/* Display Existing Products */}
         <div>
           <h2 className="text-xl mb-4">Existing Products</h2>
-          <div className="space-y-4">
+          <div className="flex flex-wrap -mx-4">
             {productData.map((product) => (
-              <div key={product._id} className="border rounded-lg p-4">
-                <h3 className="text-lg font-semibold">{product.title}</h3>
-                <p>{product.description}</p>
-                <div className="mt-4 space-x-2">
-                  <button
-                    className="bg-yellow-500 text-white py-1 px-2 rounded"
-                    onClick={() => handleEdit(product)}
-                  >
-                    Edit
-                  </button>
-                  <button
-                    className="bg-red-500 text-white py-1 px-2 rounded"
-                    onClick={() => deleteProduct(product._id)}
-                  >
-                    Delete
-                  </button>
+              <div
+                key={product._id}
+                className="w-full sm:w-1/2 lg:w-1/3 px-4 mb-8"
+              >
+                <div className="border rounded-lg p-4">
+                  <img
+                    src={product.image}
+                    alt={product.title}
+                    className="w-full h-48 object-cover rounded"
+                  />
+                  <h3 className="text-lg font-semibold mt-4">
+                    {product.title}
+                  </h3>
+                  <p className="mt-2">{product.description}</p>
+                  <div className="mt-4 space-x-2">
+                    <button
+                      className="bg-yellow-500 text-white py-1 px-2 rounded"
+                      onClick={() => handleEdit(product)}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className="bg-red-500 text-white py-1 px-2 rounded"
+                      onClick={() => deleteProduct(product._id)}
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}

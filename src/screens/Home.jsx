@@ -69,22 +69,26 @@ const Home = () => {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-screen-xl mx-auto px-4 sm:px-20 lg:px-36 py-16 bg-white">
+      <div className="bg-gray-100">
         {/* Header */}
-        <h2 className="text-4xl md:text-5xl font-extrabold mb-8 text-gray-900 text-center">
-          {homeData.secondColumnTitle}
-        </h2>
-        <p className="text-xl leading-relaxed text-gray-700 mb-10 text-center mx-auto max-w-3xl">
-          {homeData.secondParagraph1}
-        </p>
+        <div className="max-w-screen-xl mx-auto px-4 sm:px-20 lg:px-36 py-16 ">
+          <h2 className="text-4xl md:text-5xl font-extrabold mb-8 text-gray-900 text-center">
+            {homeData.secondColumnTitle}
+          </h2>
+          <p className="text-xl leading-relaxed text-gray-700 mb-10 text-center mx-auto max-w-3xl">
+            {homeData.secondParagraph1}
+          </p>
 
-        <p className="text-xl leading-relaxed text-gray-700 mb-10 text-center mx-auto max-w-3xl">
-          {homeData.secondParagraph2}
-        </p>
+          <p className="text-xl leading-relaxed text-gray-700 mb-10 text-center mx-auto max-w-3xl">
+            {homeData.secondParagraph2}
+          </p>
+        </div>
+      </div>
 
+      <div>
         {/* New Product Section */}
-        <div className="py-8">
-          <div className="">
+        <div className="py-8 max-w-screen-xl mx-auto px-4 sm:px-20 lg:px-36 py-16 bg-dark">
+          <div>
             <h2 className="text-4xl text-center font-extrabold text-gray-900 mb-6">
               Our Featured Products
             </h2>
@@ -96,6 +100,13 @@ const Home = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {productData.map((product, index) => (
                 <div key={index} className="bg-white p-6 rounded-lg shadow-md">
+                  <div className="w-full h-64 mb-4">
+                    <img
+                      src={product.image}
+                      alt={product.title}
+                      className="w-full h-full object-cover rounded-lg"
+                    />
+                  </div>
                   <h3 className="text-xl font-semibold mb-4">
                     {product.title}
                   </h3>
@@ -117,44 +128,50 @@ const Home = () => {
         </div>
 
         {/* Image Section */}
-        <div className="container mx-auto p-6">
-          <h2 className="text-2xl font-bold text-center mb-8">
-            Explore Our Jute Products
-          </h2>
+        <div style={{ backgroundColor: "#FFF5ED" }}>
+          <div className="container  p-6 max-w-screen-xl mx-auto px-4 sm:px-20 lg:px-36 py-16">
+            <h2 className="text-2xl font-bold text-center mb-8">
+              Explore Our Jute Products
+            </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="relative group overflow-hidden rounded-lg shadow-lg">
-              <img
-                src={homeData.secondImage}
-                alt="Jute Fiber"
-                className="w-full h-64 object-cover transition-transform duration-300 transform group-hover:scale-110"
-              />
-              <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-40 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100 p-4 text-center">
-                <p className="font-bold text-lg">{homeData.thirdParagraph1}</p>
-                <p>{homeData.thirdParagraph2}</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="relative group overflow-hidden rounded-lg shadow-lg">
+                <img
+                  src={homeData.secondImage}
+                  alt="Jute Fiber"
+                  className="w-full h-64 object-cover transition-transform duration-300 transform group-hover:scale-110"
+                />
+                <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-40 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100 p-4 text-center">
+                  <p className="font-bold text-lg">
+                    {homeData.thirdParagraph1}
+                  </p>
+                  <p>{homeData.thirdParagraph2}</p>
+                </div>
+              </div>
+
+              <div className="relative group overflow-hidden rounded-lg shadow-lg">
+                <img
+                  src={homeData.fifthImage}
+                  alt="Jute Industry"
+                  className="w-full h-64 object-cover transition-transform duration-300 transform group-hover:scale-110"
+                />
+                <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-40 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100 p-4 text-center">
+                  <p className="font-bold text-lg">
+                    {homeData.fifthParagraph1}
+                  </p>
+                  <p>{homeData.fifthParagraph2}</p>
+                </div>
               </div>
             </div>
 
-            <div className="relative group overflow-hidden rounded-lg shadow-lg">
-              <img
-                src={homeData.fifthImage}
-                alt="Jute Industry"
-                className="w-full h-64 object-cover transition-transform duration-300 transform group-hover:scale-110"
-              />
-              <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-40 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100 p-4 text-center">
-                <p className="font-bold text-lg">{homeData.fifthParagraph1}</p>
-                <p>{homeData.fifthParagraph2}</p>
-              </div>
+            <div className="mt-8">
+              <p className="text-lg text-gray-800 text-center">
+                {homeData.fourthParagraph}
+              </p>
+              <p className="text-lg text-gray-800 text-center mt-4">
+                {homeData.finalContent}
+              </p>
             </div>
-          </div>
-
-          <div className="mt-8">
-            <p className="text-lg text-gray-800 text-center">
-              {homeData.fourthParagraph}
-            </p>
-            <p className="text-lg text-gray-800 text-center mt-4">
-              {homeData.finalContent}
-            </p>
           </div>
         </div>
       </div>
