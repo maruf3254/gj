@@ -82,25 +82,13 @@ const Footer = () => {
           {/* Newsletter Signup */}
           <div>
             <h3 className="text-white text-lg font-semibold mb-4">
-              Stay Updated
+              Sustainability
             </h3>
             <p className="text-gray-400 mb-4">
-              Subscribe to our newsletter to receive the latest news and updates
-              on jute products.
+              Committed to eco-friendly practices, Gold Jute uses 100% natural,
+              biodegradable materials, supporting local farmers and reducing
+              waste.
             </p>
-            <form className="flex flex-col space-y-2">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="px-4 py-2 bg-gray-700 text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-              <button
-                type="submit"
-                className="px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition duration-300"
-              >
-                Subscribe
-              </button>
-            </form>
           </div>
         </div>
 
