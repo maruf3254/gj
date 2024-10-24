@@ -1,8 +1,50 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const [contactInfo, setContactInfo] = useState({
+    address: "",
+    phone: "",
+    email: "",
+    facebook: "",
+    twitter: "",
+    instagram: "",
+  });
+  const [loading, setLoading] = useState(true); // Added loading state
+
+  useEffect(() => {
+    // Fetch the contact information from the API
+    const fetchContactInfo = async () => {
+      try {
+        const response = await fetch("https://goldjute.vercel.app/api/contact");
+        const data = await response.json();
+        setContactInfo({
+          address: data.Address,
+          phone: data.phone,
+          email: data.email,
+          facebook: data.facebooklink,
+          twitter: data.twitterlink,
+          instagram: data.instalink,
+        });
+        setLoading(false); // Set loading to false once data is fetched
+      } catch (error) {
+        console.error("Error fetching contact info:", error);
+        setLoading(false); // Set loading to false in case of an error
+      }
+    };
+
+    fetchContactInfo();
+  }, []);
+
+  if (loading) {
+    // Show a loading message or spinner while data is being fetched
+    return (
+      <div className="text-center text-gray-300 py-12">
+        <p>Loading contact information...</p>
+      </div>
+    );
+  }
 
   return (
     <footer className="bg-gray-800 text-gray-300 py-12">
@@ -71,11 +113,9 @@ const Footer = () => {
               Contact Us
             </h3>
             <ul className="space-y-2">
-              <li className="text-gray-400">
-                Address: 123 Jute Street, Dhaka, Bangladesh
-              </li>
-              <li className="text-gray-400">Phone: +880-1234-567890</li>
-              <li className="text-gray-400">Email: info@goldjute.com</li>
+              <li className="text-gray-400">Address: {contactInfo.address}</li>
+              <li className="text-gray-400">Phone: {contactInfo.phone}</li>
+              <li className="text-gray-400">Email: {contactInfo.email}</li>
             </ul>
           </div>
 
@@ -96,24 +136,30 @@ const Footer = () => {
         <div className="mt-8 text-center">
           <h3 className="text-white text-lg font-semibold mb-4">Follow Us</h3>
           <div className="flex justify-center space-x-6">
-            <Link
-              to="#"
+            <a
+              href={contactInfo.facebook}
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-gray-400 hover:text-white transition duration-300"
             >
               <i className="fab fa-facebook-f"></i> Facebook
-            </Link>
-            <Link
-              to="#"
+            </a>
+            <a
+              href={contactInfo.twitter}
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-gray-400 hover:text-white transition duration-300"
             >
               <i className="fab fa-twitter"></i> Twitter
-            </Link>
-            <Link
-              to="#"
+            </a>
+            <a
+              href={contactInfo.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-gray-400 hover:text-white transition duration-300"
             >
               <i className="fab fa-instagram"></i> Instagram
-            </Link>
+            </a>
           </div>
         </div>
 
