@@ -25,7 +25,12 @@ const Home = () => {
           `${import.meta.env.VITE_API_URL}/api/products`
         );
         const data = await response.json();
-        setProductData(data.slice(0, 3)); // Set only the first 3 products
+
+        // Shuffle the data array
+        const shuffledData = data.sort(() => 0.5 - Math.random());
+
+        // Set only three random products
+        setProductData(shuffledData.slice(0, 3));
       } catch (error) {
         console.error("Error fetching product data:", error);
       }
@@ -99,18 +104,21 @@ const Home = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {productData.map((product, index) => (
-                <div key={index} className="bg-white p-6 rounded-lg shadow-md">
+                <div
+                  key={index}
+                  className="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 ease-in-out transform hover:-translate-y-2"
+                >
                   <div className="w-full h-64 mb-4">
                     <img
                       src={product.image}
                       alt={product.title}
-                      className="w-full h-full object-cover rounded-lg"
+                      className="w-full h-full object-contain"
                     />
                   </div>
-                  <h3 className="text-xl font-semibold mb-4">
+                  <h3 className="text-2xl font-semibold text-gray-800 mb-3">
                     {product.title}
                   </h3>
-                  <p className="text-gray-700 mb-4">{product.description}</p>
+                  <p className="text-gray-600">{product.description}</p>
                 </div>
               ))}
             </div>
